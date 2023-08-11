@@ -1,0 +1,54 @@
+ :: batch file for automatic compilation of mcu specific and uart specific versions
+:: --------------------------------------------------------------------------------------------------------------------
+:: compiler version: gcc version 4.3.2 (WinAVR 20090313)
+
+
+:: some global settings
+:: --------------------------------------------------------
+:: the number behind the dot is no longer the svn revision number of main.c, since I realized that only 5 2-digit numbers are left before 100!
+set REV=2.9Q
+:: the frequency is not used for baudrate calculation, but for a delay loop, so the maximum possible frequency should be used here
+set FREQ=20000000UL
+:: --------------------------------------------------------
+
+
+:: remove the old hexfiles and the zip archive, on the bottom a new one will be created
+:: --------------------------------------------------------
+del build\*.*
+:: --------------------------------------------------------
+
+
+:: build the non-RS485 version
+:: --------------------------------------------------------
+call make_targets.bat
+:: --------------------------------------------------------
+
+
+:: build the RS485 version (first parameter is the compiler switch for the #define, the second is the filename marker for the rs485 version
+:: --------------------------------------------------------
+call make_targets.bat -DRS485 rs485_
+:: --------------------------------------------------------
+
+pause
+
+:: clean up files
+:: --------------------------------------------------------
+del *.o
+del *.d
+del *.elf
+del *.map
+del *.lss
+:: --------------------------------------------------------
+
+
+:: make an archive with the precompiled hexfiles
+:: --------------------------------------------------------
+:: copy the latest version of the infosheet to the build directory
+copy chip45boot2_infosheet.pdf build\chip45boot2_infosheet.pdf
+:: go to the build directory
+cd build
+C:\Programme\7-Zip\7z.exe a -tZIP -x!*svn chip45boot2_v%REV%_pre.zip *
+:: --------------------------------------------------------
+
+
+pause

@@ -1,0 +1,957 @@
+:: batch file for automatic compilation of mcu specific and uart specific versions
+:: --------------------------------------------------------------------------------------------------------------------
+:: compiler version: AVR GNU Toolchain 3.4.1.95, comes with Atmel Studio 6 (6.0.1996 Service Pack 2)
+::
+:: add this line to a target to get a .lss assembler file for debugging purposes:
+:: avr-objdump -h -S chip45boot2.elf > chip45boot2.lss
+
+
+:: get parameters for RS485 versions
+set DEF485=%1
+set NAME485=%2
+
+:: set path to toolchain
+set PATH=c:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1056\avr8-gnu-toolchain\bin\;%PATH%
+
+:: clear counter for number of targets
+set NOFTARGETS=0
+
+::goto test
+
+
+:: ATmega8
+:: --------------------------------------------------------
+set MCU=atmega8
+set BOOTADDR=0x1800
+set SERIALPORT=0
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%SERIALPORT%_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+:: --------------------------------------------------------
+
+
+:: ATmega88
+:: --------------------------------------------------------
+set MCU=atmega88
+set BOOTADDR=0x1800
+set SERIALPORT=0
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%SERIALPORT%_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+:: --------------------------------------------------------
+
+
+:: ATmega88P
+:: --------------------------------------------------------
+set MCU=atmega88p
+set BOOTADDR=0x1800
+set SERIALPORT=0
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%SERIALPORT%_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+:: --------------------------------------------------------
+
+
+:: ATmega8515
+:: --------------------------------------------------------
+set MCU=atmega8515
+set BOOTADDR=0x1800
+set SERIALPORT=0
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%SERIALPORT%_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+:: --------------------------------------------------------
+
+
+:: ATmega8535
+:: --------------------------------------------------------
+set MCU=atmega8535
+set BOOTADDR=0x1800
+set SERIALPORT=0
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%SERIALPORT%_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+:: --------------------------------------------------------
+
+
+:: ATmega16
+:: --------------------------------------------------------
+set MCU=atmega16
+set BOOTADDR=0x3800
+set SERIALPORT=0
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%SERIALPORT%_%NAME485%v%REV%.hex
+avr-objdump -h -S chip45boot2.elf > build/chip45boot2_%MCU%_uart%SERIALPORT%_%NAME485%v%REV%.lss
+set /a NOFTARGETS+=1
+:: --------------------------------------------------------
+
+
+:: ATmega16A
+:: --------------------------------------------------------
+set MCU=atmega16a
+set BOOTADDR=0x3800
+set SERIALPORT=0
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%SERIALPORT%_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+:: --------------------------------------------------------
+
+
+:: ATmega162
+:: --------------------------------------------------------
+set MCU=atmega162
+set BOOTADDR=0x3800
+for %%P in (0 1) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+:: --------------------------------------------------------
+
+
+:: ATmega164a
+:: --------------------------------------------------------
+set MCU=atmega164a
+set BOOTADDR=0x3800
+for %%P in (0 1) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+:: --------------------------------------------------------
+
+
+:: ATmega164P
+:: --------------------------------------------------------
+set MCU=atmega164p
+set BOOTADDR=0x3800
+for %%P in (0 1) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+:: --------------------------------------------------------
+
+
+:: ATmega165
+:: --------------------------------------------------------
+set MCU=atmega165
+set BOOTADDR=0x3800
+set SERIALPORT=0
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%SERIALPORT%_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+:: --------------------------------------------------------
+
+
+:: ATmega168
+:: --------------------------------------------------------
+set MCU=atmega168
+set BOOTADDR=0x3800
+set SERIALPORT=0
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%SERIALPORT%_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+:: --------------------------------------------------------
+
+
+
+:: ATmega168P
+:: --------------------------------------------------------
+set MCU=atmega168p
+set BOOTADDR=0x3800
+set SERIALPORT=0
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%SERIALPORT%_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+:: --------------------------------------------------------
+
+
+:: ATmega32
+:: --------------------------------------------------------
+set MCU=atmega32
+set BOOTADDR=0x7800
+set SERIALPORT=0
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%SERIALPORT%_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+:: --------------------------------------------------------
+
+
+:: ATmega325
+:: --------------------------------------------------------
+set MCU=atmega325
+set BOOTADDR=0x7800
+set SERIALPORT=0
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%SERIALPORT%_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+:: --------------------------------------------------------
+
+
+:: ATmega3250
+:: --------------------------------------------------------
+set MCU=atmega3250
+set BOOTADDR=0x7800
+set SERIALPORT=0
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%SERIALPORT%_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+:: --------------------------------------------------------
+
+
+:: ATmega324P
+:: --------------------------------------------------------
+set MCU=atmega324p
+set BOOTADDR=0x7800
+for %%P in (0 1) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+:: --------------------------------------------------------
+
+
+:: ATmega328
+:: --------------------------------------------------------
+set MCU=atmega328
+set BOOTADDR=0x7800
+set SERIALPORT=0
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%SERIALPORT%_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+:: --------------------------------------------------------
+
+
+:: ATmega328P
+:: --------------------------------------------------------
+set MCU=atmega328p
+set BOOTADDR=0x7800
+set SERIALPORT=0
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%SERIALPORT%_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+:: --------------------------------------------------------
+
+
+:: ATmega3290P
+:: --------------------------------------------------------
+set MCU=atmega3290p
+set BOOTADDR=0x7800
+set SERIALPORT=0
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%SERIALPORT%_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+:: --------------------------------------------------------
+
+
+:: ATmega32U3
+:: --------------------------------------------------------
+set MCU=atmega32u4
+set BOOTADDR=0x7800
+set SERIALPORT=1
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%SERIALPORT%_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+:: --------------------------------------------------------
+
+
+:: ATmega64
+:: --------------------------------------------------------
+set MCU=atmega64
+set BOOTADDR=0xf800
+for %%P in (0 1) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+:: --------------------------------------------------------
+
+
+:: ATmega640
+:: --------------------------------------------------------
+set MCU=atmega640
+set BOOTADDR=0xf800
+for %%P in (0 1 2 3) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+:: --------------------------------------------------------
+
+
+:: ATmega644
+:: --------------------------------------------------------
+set MCU=atmega644
+set BOOTADDR=0xf800
+set SERIALPORT=0
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%SERIALPORT%_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+:: --------------------------------------------------------
+
+
+:: ATmega644P
+:: --------------------------------------------------------
+set MCU=atmega644p
+set BOOTADDR=0xf800
+for %%P in (0 1) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+:: --------------------------------------------------------
+
+
+:: ATmega644A
+:: --------------------------------------------------------
+set MCU=atmega644a
+set BOOTADDR=0xf800
+for %%P in (0 1) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+:: --------------------------------------------------------
+
+
+:: ATmega645
+:: --------------------------------------------------------
+set MCU=atmega645
+set BOOTADDR=0xf800
+set SERIALPORT=0
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%SERIALPORT%_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+:: --------------------------------------------------------
+
+
+:: ATmega6450
+:: --------------------------------------------------------
+set MCU=atmega6450
+set BOOTADDR=0xf800
+set SERIALPORT=0
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%SERIALPORT%_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+:: --------------------------------------------------------
+
+
+:: ATmega128
+:: --------------------------------------------------------
+set MCU=atmega128
+set BOOTADDR=0x1f800
+for %%P in (0 1) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+:: --------------------------------------------------------
+
+
+:: ATmega128rfa1
+:: --------------------------------------------------------
+set MCU=atmega128rfa1
+set BOOTADDR=0x1f800
+for %%P in (0 1) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+:: --------------------------------------------------------
+
+
+:: ATmega1280
+:: --------------------------------------------------------
+set MCU=atmega1280
+set BOOTADDR=0x1f800
+for %%P in (0 1 2 3) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+:: --------------------------------------------------------
+
+
+:: ATmega1284
+:: --------------------------------------------------------
+set MCU=atmega1284
+set BOOTADDR=0x1f800
+for %%P in (0 1) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+:: --------------------------------------------------------
+
+
+:: ATmega1284P
+:: --------------------------------------------------------
+set MCU=atmega1284p
+set BOOTADDR=0x1f800
+for %%P in (0 1) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+:: --------------------------------------------------------
+
+
+:: ATmega1281
+:: --------------------------------------------------------
+set MCU=atmega1281
+set BOOTADDR=0x1f800
+for %%P in (0 1) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+:: --------------------------------------------------------
+
+
+:: ATmega2560
+:: --------------------------------------------------------
+set MCU=atmega2560
+set BOOTADDR=0x3f800
+for %%P in (0 1 2 3) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+:: --------------------------------------------------------
+
+
+:: ATmega2561
+:: --------------------------------------------------------
+set MCU=atmega2561
+set BOOTADDR=0x3f800
+for %%P in (0 1) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+:: --------------------------------------------------------
+
+
+:: AT90CAN32
+:: --------------------------------------------------------
+set MCU=at90can32
+set BOOTADDR=0x7800
+for %%P in (0 1) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+:: --------------------------------------------------------
+
+
+:: AT90CAN64
+:: --------------------------------------------------------
+set MCU=at90can64
+set BOOTADDR=0xf800
+for %%P in (0 1) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+:: --------------------------------------------------------
+
+
+:: AT90CAN128
+:: --------------------------------------------------------
+set MCU=at90can128
+set BOOTADDR=0x1f800
+for %%P in (0 1) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+:: --------------------------------------------------------
+
+
+:: AT90PWM216
+:: --------------------------------------------------------
+set MCU=at90pwm216
+set BOOTADDR=0x3800
+set SERIALPORT=0
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%SERIALPORT%_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+:: --------------------------------------------------------
+
+
+:: AT90PWM316
+:: --------------------------------------------------------
+set MCU=at90pwm316
+set BOOTADDR=0x3800
+set SERIALPORT=0
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%SERIALPORT% -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe -mmcu=%MCU% -nostartfiles  -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom chip45boot2.elf build/chip45boot2_%MCU%_uart%SERIALPORT%_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+:: --------------------------------------------------------
+
+
+:: ATxmega64A1
+:: --------------------------------------------------------
+set MCU=atxmega64a1
+set BOOTADDR=0x10000
+for %%P in (0 1 2 3 4 5 6 7) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT boot.o -MF boot.o.d  -c  boot.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT sp_driver.o -MF sp_driver.o.d  -x assembler-with-cpp -Wa,-gdwarf2 -c  sp_driver.s
+avr-gcc.exe -mmcu=%MCU% -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o boot.o sp_driver.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom -R .fuse -R .lock -R .signature chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+ren build\chip45boot2_%MCU%_uart0_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartC0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart1_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartC1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart2_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartD0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart3_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartD1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart4_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartE0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart5_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartE1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart6_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartF0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart7_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartF1_%NAME485%v%REV%.hex
+:: --------------------------------------------------------
+
+
+:: ATxmega128A1
+:: --------------------------------------------------------
+set MCU=atxmega128a1
+set BOOTADDR=0x20000
+for %%P in (0 1 2 3 4 5 6 7) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT boot.o -MF boot.o.d  -c  boot.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT sp_driver.o -MF sp_driver.o.d  -x assembler-with-cpp -Wa,-gdwarf2 -c  sp_driver.s
+avr-gcc.exe -mmcu=%MCU% -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o boot.o sp_driver.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom -R .fuse -R .lock -R .signature chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+ren build\chip45boot2_%MCU%_uart0_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartC0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart1_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartC1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart2_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartD0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart3_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartD1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart4_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartE0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart5_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartE1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart6_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartF0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart7_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartF1_%NAME485%v%REV%.hex
+:: --------------------------------------------------------
+
+
+:: ATxmega128A1U
+:: --------------------------------------------------------
+set MCU=atxmega128a1u
+set BOOTADDR=0x20000
+for %%P in (0 1 2 3 4 5 6 7) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT boot.o -MF boot.o.d  -c  boot.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT sp_driver.o -MF sp_driver.o.d  -x assembler-with-cpp -Wa,-gdwarf2 -c  sp_driver.s
+avr-gcc.exe -mmcu=%MCU% -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o boot.o sp_driver.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom -R .fuse -R .lock -R .signature chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+ren build\chip45boot2_%MCU%_uart0_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartC0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart1_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartC1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart2_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartD0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart3_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartD1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart4_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartE0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart5_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartE1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart6_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartF0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart7_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartF1_%NAME485%v%REV%.hex
+:: --------------------------------------------------------
+
+
+:: ATxmega64A3
+:: --------------------------------------------------------
+set MCU=atxmega64a3
+set BOOTADDR=0x10000
+for %%P in (0 1 2 3 4 5 6) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT boot.o -MF boot.o.d  -c  boot.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT sp_driver.o -MF sp_driver.o.d  -x assembler-with-cpp -Wa,-gdwarf2 -c  sp_driver.s
+avr-gcc.exe -mmcu=%MCU% -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o boot.o sp_driver.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom -R .fuse -R .lock -R .signature chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+ren build\chip45boot2_%MCU%_uart0_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartC0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart1_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartC1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart2_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartD0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart3_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartD1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart4_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartE0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart5_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartE1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart6_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartF0_%NAME485%v%REV%.hex
+:: --------------------------------------------------------
+
+
+:: ATxmega64A3U
+:: --------------------------------------------------------
+set MCU=atxmega64a3u
+set BOOTADDR=0x10000
+for %%P in (0 1 2 3 4 5 6) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT boot.o -MF boot.o.d  -c  boot.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT sp_driver.o -MF sp_driver.o.d  -x assembler-with-cpp -Wa,-gdwarf2 -c  sp_driver.s
+avr-gcc.exe -mmcu=%MCU% -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o boot.o sp_driver.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom -R .fuse -R .lock -R .signature chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+ren build\chip45boot2_%MCU%_uart0_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartC0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart1_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartC1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart2_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartD0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart3_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartD1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart4_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartE0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart5_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartE1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart6_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartF0_%NAME485%v%REV%.hex
+:: --------------------------------------------------------
+
+
+:: ATxmega128A3
+:: --------------------------------------------------------
+set MCU=atxmega128a3
+set BOOTADDR=0x20000
+for %%P in (0 1 2 3 4 5 6) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT boot.o -MF boot.o.d  -c  boot.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT sp_driver.o -MF sp_driver.o.d  -x assembler-with-cpp -Wa,-gdwarf2 -c  sp_driver.s
+avr-gcc.exe -mmcu=%MCU% -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o boot.o sp_driver.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom -R .fuse -R .lock -R .signature chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+ren build\chip45boot2_%MCU%_uart0_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartC0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart1_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartC1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart2_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartD0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart3_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartD1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart4_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartE0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart5_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartE1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart6_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartF0_%NAME485%v%REV%.hex
+:: --------------------------------------------------------
+
+
+:: ATxmega128A3U
+:: --------------------------------------------------------
+set MCU=atxmega128a3u
+set BOOTADDR=0x20000
+for %%P in (0 1 2 3 4 5 6) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT boot.o -MF boot.o.d  -c  boot.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT sp_driver.o -MF sp_driver.o.d  -x assembler-with-cpp -Wa,-gdwarf2 -c  sp_driver.s
+avr-gcc.exe -mmcu=%MCU% -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o boot.o sp_driver.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom -R .fuse -R .lock -R .signature chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+ren build\chip45boot2_%MCU%_uart0_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartC0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart1_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartC1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart2_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartD0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart3_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartD1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart4_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartE0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart5_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartE1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart6_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartF0_%NAME485%v%REV%.hex
+:: --------------------------------------------------------
+
+
+:: ATxmega192A3
+:: --------------------------------------------------------
+set MCU=atxmega192a3
+set BOOTADDR=0x30000
+for %%P in (0 1 2 3 4 5 6) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT boot.o -MF boot.o.d  -c  boot.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT sp_driver.o -MF sp_driver.o.d  -x assembler-with-cpp -Wa,-gdwarf2 -c  sp_driver.s
+avr-gcc.exe -mmcu=%MCU% -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o boot.o sp_driver.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom -R .fuse -R .lock -R .signature chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+ren build\chip45boot2_%MCU%_uart0_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartC0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart1_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartC1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart2_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartD0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart3_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartD1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart4_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartE0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart5_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartE1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart6_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartF0_%NAME485%v%REV%.hex
+:: --------------------------------------------------------
+
+
+:: ATxmega256A3
+:: --------------------------------------------------------
+set MCU=atxmega256a3
+set BOOTADDR=0x40000
+for %%P in (0 1 2 3 4 5 6) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT boot.o -MF boot.o.d  -c  boot.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT sp_driver.o -MF sp_driver.o.d  -x assembler-with-cpp -Wa,-gdwarf2 -c  sp_driver.s
+avr-gcc.exe -mmcu=%MCU% -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o boot.o sp_driver.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom -R .fuse -R .lock -R .signature chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+ren build\chip45boot2_%MCU%_uart0_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartC0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart1_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartC1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart2_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartD0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart3_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartD1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart4_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartE0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart5_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartE1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart6_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartF0_%NAME485%v%REV%.hex
+:: --------------------------------------------------------
+
+
+:: ATxmega256A3B
+:: --------------------------------------------------------
+set MCU=atxmega256a3b
+set BOOTADDR=0x40000
+for %%P in (0 1 2 3 4 6) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT boot.o -MF boot.o.d  -c  boot.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT sp_driver.o -MF sp_driver.o.d  -x assembler-with-cpp -Wa,-gdwarf2 -c  sp_driver.s
+avr-gcc.exe -mmcu=%MCU% -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o boot.o sp_driver.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom -R .fuse -R .lock -R .signature chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+ren build\chip45boot2_%MCU%_uart0_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartC0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart1_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartC1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart2_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartD0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart3_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartD1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart4_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartE0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart6_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartF0_%NAME485%v%REV%.hex
+:: --------------------------------------------------------
+
+
+:: ATxmega16A4
+:: --------------------------------------------------------
+set MCU=atxmega16a4
+set BOOTADDR=0x4000
+for %%P in (0 1 2 3 4) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT boot.o -MF boot.o.d  -c  boot.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT sp_driver.o -MF sp_driver.o.d  -x assembler-with-cpp -Wa,-gdwarf2 -c  sp_driver.s
+avr-gcc.exe -mmcu=%MCU% -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o boot.o sp_driver.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom -R .fuse -R .lock -R .signature chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+ren build\chip45boot2_%MCU%_uart0_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartC0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart1_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartC1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart2_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartD0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart3_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartD1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart4_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartE0_%NAME485%v%REV%.hex
+:: --------------------------------------------------------
+
+
+:: ATxmega16A4U
+:: --------------------------------------------------------
+set MCU=atxmega16a4u
+set BOOTADDR=0x4000
+for %%P in (0 1 2 3 4) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT boot.o -MF boot.o.d  -c  boot.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT sp_driver.o -MF sp_driver.o.d  -x assembler-with-cpp -Wa,-gdwarf2 -c  sp_driver.s
+avr-gcc.exe -mmcu=%MCU% -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o boot.o sp_driver.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom -R .fuse -R .lock -R .signature chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+ren build\chip45boot2_%MCU%_uart0_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartC0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart1_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartC1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart2_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartD0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart3_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartD1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart4_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartE0_%NAME485%v%REV%.hex
+:: --------------------------------------------------------
+
+
+:: ATxmega32A4
+:: --------------------------------------------------------
+set MCU=atxmega32a4
+set BOOTADDR=0x8000
+for %%P in (0 1 2 3 4) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT boot.o -MF boot.o.d  -c  boot.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT sp_driver.o -MF sp_driver.o.d  -x assembler-with-cpp -Wa,-gdwarf2 -c  sp_driver.s
+avr-gcc.exe -mmcu=%MCU% -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o boot.o sp_driver.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom -R .fuse -R .lock -R .signature chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+ren build\chip45boot2_%MCU%_uart0_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartC0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart1_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartC1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart2_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartD0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart3_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartD1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart4_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartE0_%NAME485%v%REV%.hex
+:: --------------------------------------------------------
+
+
+:: ATxmega32A4U
+:: --------------------------------------------------------
+set MCU=atxmega32a4u
+set BOOTADDR=0x8000
+for %%P in (0 1 2 3 4) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT boot.o -MF boot.o.d  -c  boot.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT sp_driver.o -MF sp_driver.o.d  -x assembler-with-cpp -Wa,-gdwarf2 -c  sp_driver.s
+avr-gcc.exe -mmcu=%MCU% -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o boot.o sp_driver.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom -R .fuse -R .lock -R .signature chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+ren build\chip45boot2_%MCU%_uart0_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartC0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart1_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartC1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart2_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartD0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart3_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartD1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart4_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartE0_%NAME485%v%REV%.hex
+:: --------------------------------------------------------
+
+
+:: ATxmega128A4U
+:: --------------------------------------------------------
+set MCU=atxmega128a4u
+set BOOTADDR=0x20000
+for %%P in (0 1 2 3 4) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT boot.o -MF boot.o.d  -c  boot.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT sp_driver.o -MF sp_driver.o.d  -x assembler-with-cpp -Wa,-gdwarf2 -c  sp_driver.s
+avr-gcc.exe -mmcu=%MCU% -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o boot.o sp_driver.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom -R .fuse -R .lock -R .signature chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+ren build\chip45boot2_%MCU%_uart0_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartC0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart1_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartC1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart2_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartD0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart3_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartD1_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart4_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartE0_%NAME485%v%REV%.hex
+:: --------------------------------------------------------
+
+
+:: ATxmega64D3
+:: --------------------------------------------------------
+set MCU=atxmega64d3
+set BOOTADDR=0x10000
+for %%P in (0 2 4) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT boot.o -MF boot.o.d  -c  boot.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT sp_driver.o -MF sp_driver.o.d  -x assembler-with-cpp -Wa,-gdwarf2 -c  sp_driver.s
+avr-gcc.exe -mmcu=%MCU% -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o boot.o sp_driver.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom -R .fuse -R .lock -R .signature chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+ren build\chip45boot2_%MCU%_uart0_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartC0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart2_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartD0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart4_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartE0_%NAME485%v%REV%.hex
+:: --------------------------------------------------------
+
+
+:: ATxmega128D3
+:: --------------------------------------------------------
+set MCU=atxmega128d3
+set BOOTADDR=0x20000
+for %%P in (0 2 4) do (
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -DBOOTADDR=%BOOTADDR% %DEF485% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT main.o -MF main.o.d  -c  main.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT usart.o -MF usart.o.d  -c  usart.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT boot.o -MF boot.o.d  -c  boot.c
+avr-gcc.exe  -mmcu=%MCU% -Wall -gdwarf-2 -std=gnu99 -DSERIALPORT=%%P -DF_CPU=%FREQ% -Os -fsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT sp_driver.o -MF sp_driver.o.d  -x assembler-with-cpp -Wa,-gdwarf2 -c  sp_driver.s
+avr-gcc.exe -mmcu=%MCU% -Wl,-Map=chip45boot2.map -Wl,-section-start=.text=%BOOTADDR% main.o usart.o boot.o sp_driver.o -o chip45boot2.elf
+avr-objcopy -O ihex -R .eeprom -R .fuse -R .lock -R .signature chip45boot2.elf build/chip45boot2_%MCU%_uart%%P_%NAME485%v%REV%.hex
+set /a NOFTARGETS+=1
+)
+ren build\chip45boot2_%MCU%_uart0_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartC0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart2_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartD0_%NAME485%v%REV%.hex
+ren build\chip45boot2_%MCU%_uart4_%NAME485%v%REV%.hex chip45boot2_%MCU%_uartE0_%NAME485%v%REV%.hex
+:: --------------------------------------------------------
+
+:end
+
+
+echo ==========================
+echo Targets compiled: %NOFTARGETS%
+echo ==========================
+
+pause

@@ -1,0 +1,55 @@
+Com Port
+========
+
+The "Select COM Port" list shows the available COM ports on the system. Both real serial COM ports as well as virtual COM ports from USB UART converters (e.g. Silabs' CP2102 or FTDI's FT232) are shown here.
+
+The list is updated every two seconds, so no need to restart the program when connecting a USB device. The new virtual COM port number will be shown immediately.
+
+Select the COM port you want to use for communicating with the target bootloader.
+
+
+Baudrate
+========
+
+The bootloader will automatically synchronize to the baudrate selected here. A higher baudrate result in faster upload, but the baudrate must fit to the target system clock, from which the target baudrate is derived.
+
+The target baudrate is derived from the system clock by dividing the system clock by a fixed 16 (due to the UART oversampling) and then by some integer division factor.
+
+Example 1: If the target runs at 7.3728MHz and you select 57600 baud, the target calculates 7372800/16/57600=8. The required division factor is 8.
+
+Example 2: If the target runs at 8.0000MHz and you select 57600 baud, the target calculates 8000000/16/57600=8.68, which is not an integer number. The target would chose 8, but this leads to 8000000/16/8=62500 baud, which is a too big deviation from the 57600. A deviation of less than 2% is usually acceptable.
+
+Fortunately you can check "Also Show Non-Standard Baudrates", which will provide more baudrates to chose from, e.g. the 62500 from the above example.
+
+Also certain electrical circumstances can limit the maximum baudrate, e.g. slow optocouplers, very long signal lines, electrical disturbances, etc.
+
+
+Hexfiles
+========
+
+A file select dialog opens when one of the "Select Flash/Eeprom Hexfile" button is pressed. Select your desired hexfile for upload here.
+
+Standard Intel hexfiles are supported by the PC application. The hexfile is being parsed and checked for consistency before it is transmitted to the bootloader.
+
+Also .eep files, which are generated for eeprom content e.g. from Atmels AVR-Studio/WinAVR, are supported and can be selected in the file selection dialog. .eep files in fact are Intel hexfiles. Some compiler produce .a43 files, which are also hexfile compatible and are also supported.
+
+
+Connect and Program
+===================
+
+Press the "Connect to Bootloader" button to start the bootloader connect sequence, i.e. the PC application will open the COM port (which can reset the target automatically in case of auto-reset feature included) and send a character sequence for up to five seconds to allow the bootloader to recognize the baudrate and send an answer. The target has to be reset during this sequence to enter the bootloader.
+
+If the connect was successful, the square indicator will light green and the text on the left shows "Connected!".
+
+Now either "Program Flash" or "Program Eeprom" can be pressed to upload the previously selected hexfile to flash or eeprom memory. The status indicator will blink yellow during upload and light green upon completion. In case of an error it will light red.
+
+The button "Start App" will force the bootloader to start the uploaded application by jumping to bottom of flash 0x00000. It will also disconnect from the bootloader and the COM port will be closed.
+
+
+Misc
+====
+
+The button "Show Communication Log" will open a small log window, which shows the currently performed tasks by the PC program. The status output here might help to trace communication problems with the bootloader.
+
+The "Exit" button exits the application. All currently selected values, like COM port, baudrate, filenames will be saved to an ini file and will be restored on the next application start.
+

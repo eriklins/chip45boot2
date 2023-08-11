@@ -1,0 +1,17 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "chip45boot2_Studio6_Xmega", "chip45boot2_Studio6_Xmega.cproj", "{85F8EDC8-0E41-4DC9-8E77-98E6D074B6BC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Studio6_Xmega|AVR = Studio6_Xmega|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{85F8EDC8-0E41-4DC9-8E77-98E6D074B6BC}.Studio6_Xmega|AVR.ActiveCfg = Studio6_Xmega_Output|AVR
+		{85F8EDC8-0E41-4DC9-8E77-98E6D074B6BC}.Studio6_Xmega|AVR.Build.0 = Studio6_Xmega_Output|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
